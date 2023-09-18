@@ -128,7 +128,7 @@ public struct DiagnosticSpec {
   /// The expected severity of the diagnostic
   public let severity: DiagnosticSeverity
 
-  /// If not `nil`, the text the diagnostic is expected to highlight
+  /// If not `nil`, the text fragments the diagnostic is expected to highlight
   public let highlights: [String]?
 
   /// The notes that are expected to be attached to the diagnostic
@@ -237,7 +237,7 @@ func assertDiagnostic(
       XCTFail(
         """
         Expected \(highlights.count) highlights but received \(diag.highlights.count):
-        \(diag.highlights.map(\.debugDescription).joined(separator: "\n"))
+        \(diag.highlights.map(\.trimmedDescription).joined(separator: "\n"))
         """,
         file: spec.originatorFile,
         line: spec.originatorLine
